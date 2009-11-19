@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>sine wave generator - SoundCanvas</title>
+		<script src="../lib/swfobject.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../src/SoundCanvas.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			attachEvents = function() {
+				document.getElementById("play").addEventListener("click", function(e) {
+					SoundCanvas.play();
+					e.preventDefault();
+				}, false);
+				
+				document.getElementById("stop").addEventListener("click", function(e) {
+					SoundCanvas.stop();
+					e.preventDefault();
+				}, false);
+			};
+		
+			window.addEventListener("load", function() {
+				SoundCanvas.events.onready = function() {
+					console.log("SoundCanvas is ready");
+					attachEvents();
+				};
+				
+				SoundCanvas.events.ongenerate = function(position) {
+					var ret = [];
+					
+					for (var i = 0; i < SoundCanvas.options.BUFFER_SIZE; i++) {
+						var f = Math.sin((i + position) / Math.PI / 4);
+						ret.push(f); // left channel
+						ret.push(f); // right channel
+					}
+
+					return ret;
+				};
+				
+				SoundCanvas.init();
+			}, false);
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="button" value="play" id="play">
+			<input type="button" value="stop" id="stop">
+		</div>
+	</body>
+</html>
