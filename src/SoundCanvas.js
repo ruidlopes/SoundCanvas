@@ -1,7 +1,7 @@
 var SoundCanvas = {
 	
 	options: {
-		BUFFER_SIZE: 4096
+		BUFFER_SIZE: 8192
 	},
 	
 	events: {
