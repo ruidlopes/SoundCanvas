@@ -1,7 +1,8 @@
 var SoundCanvas = {
 	
 	options: {
-		BUFFER_SIZE: 8192
+		BUFFER_SIZE: 8192,
+		location: "../build/SoundCanvas.swf"
 	},
 	
 	events: {
@@ -17,7 +18,7 @@ var SoundCanvas = {
 	init: function() {
 		document.body.innerHTML += "<div id='_soundcanvas'></div>";
 		swfobject.embedSWF(
-			"../build/SoundCanvas.swf",
+			SoundCanvas.options.location,
 			"_soundcanvas",
 			"100",
 			"100",
